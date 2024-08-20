@@ -1,0 +1,30 @@
+version: '3'
+networks:
+  backend:
+    driver: bridge
+
+services:
+  invoice-server:
+    build:
+      context: ./ecpay-invoice-service
+    restart: always # 设置容器总是重新启动
+    volumes:
+      - ./volumes/ecpay-invoice-service/logs:/app/logs
+    ports:
+      - "3123:3123" # 如果应用程序监听端口3000，请根据实际情况进行更改
+  statistic:
+    build:
+      context: ./picbot-backend
+    restart: always
+    command: ./main statistic
+    volumes:
+      - ./picbot-backend/staticDir:/app/staticDir
+      - ./picbot-backend/staticDirPrivate:/app/staticDirPrivate
+    networks:
+      - backend
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "10"
+        max-size: "1m"
+ 

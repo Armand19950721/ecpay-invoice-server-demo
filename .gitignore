@@ -1,0 +1,5 @@
+volumes/
+node_modules/
+logs/
+ecpay-invoice-service/conf/invoice_conf.xml
+ecpay-invoice-service/.env

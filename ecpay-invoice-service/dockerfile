@@ -1,0 +1,19 @@
+# 使用Node.js 14镜像作为基础镜像
+FROM node:14
+
+# 在容器内创建一个工作目录
+WORKDIR /app
+
+# 复制应用程序代码到容器内的工作目录
+COPY . .
+
+# 使用npm安装依赖项
+RUN npm install
+
+CMD ["node", "app.js"]
+
+# 进入交互式shell，以便手动调试
+# CMD ["tail", "-f", "/dev/null"]
+
+# 暴露应用程序监听的端口（根据您的应用程序配置进行更改）
+EXPOSE 3123
